@@ -1,5 +1,31 @@
 ## NOT MAINTAINED
 
+## 树莓派创建AP
+```
+1.git clone https://github.com/oblique/create_ap.git
+2.cd create_ap
+3.sudo make install就这样安装好了
+4.接下来安装依赖库sudo apt-get install util-linux procps hostapd iproute2 iw haveged dnsmasq
+5.创建wifi
+先使用 iwconfig查看自己的网络设备名
+比如本机的无线设备为wlan0 , 网卡为eth0
+则设置wifi格式:
+sudo create_ap wlan0 eth0 热点名 密码
+(例子：没有密码 名字为pibot 后可以跟密码):
+sudo create_ap wlan0 eth0 pibot --no-virt
+6.可能会出现以下错误：
+if “command failed: Input/output error (-5)
+RTNETLINK answers: Operation not possible due to RF-kill”
+则运行：
+rfkill unblock wifi
+7.开机自动启动：
+打开文件：/etc/rc.local
+添加：
+rfkill unblock wifi
+create_ap wlan0 eth0 pibot --no-virt
+
+```
+
 This project is no longer maintained.
 
 
